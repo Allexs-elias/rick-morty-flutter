@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DetallePersonaje extends StatelessWidget {
+class DetallePersonaje extends StatelessWidget { // Pantalla de detalle de un personaje, que muestra información detallada sobre el personaje seleccionado
   final Map<String, dynamic> personaje;
 
   const DetallePersonaje({
@@ -9,7 +9,7 @@ class DetallePersonaje extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // Crea la estructura principal de la pantalla de detalle del personaje, incluyendo la imagen, nombre, estado, especie, género, origen y última ubicación
     final estado = personaje['status'] == 'Alive'
         ? 'Vivo'
         : personaje['status'] == 'Dead'
@@ -23,12 +23,12 @@ class DetallePersonaje extends StatelessWidget {
       'unknown': 'Desconocido',
     }[personaje['gender']] ?? personaje['gender'];
 
-    return Scaffold(
+    return Scaffold( // Scaffold para la pantalla de detalle del personaje, con un AppBar y un cuerpo que contiene la información del personaje
       appBar: AppBar(
         title: const Text('Ficha del personaje'),
         backgroundColor: const Color(0xFF101713),
       ),
-      body: SingleChildScrollView(
+      body: SingleChildScrollView( // Permite que el contenido de la pantalla de detalle del personaje sea desplazable si es necesario
         padding: const EdgeInsets.all(24),
         child: Center(
           child: ConstrainedBox(
@@ -116,11 +116,11 @@ class DetallePersonaje extends StatelessWidget {
     );
   }
 
-  String nombreLugar(String nombre) {
+  String nombreLugar(String nombre) { // Función para traducir el nombre del lugar, devolviendo "Desconocido" si el nombre es "unknown"
     return nombre == 'unknown' ? 'Desconocido' : nombre;
   }
 
-  Widget dato(IconData icono, String titulo, String valor) {
+  Widget dato(IconData icono, String titulo, String valor) { // Widget para mostrar un dato del personaje, con un icono, un título y un valor
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static Future<Map<String, dynamic>> obtenerPersonajes({
+  static Future<Map<String, dynamic>> obtenerPersonajes({ // Función para obtener los personajes de la API de Rick y Morty, con parámetros opcionales para la página, el nombre y el estado
     int pagina = 1,
     String nombre = '',
     String estado = '',
@@ -17,7 +17,7 @@ class ApiService {
       },
     );
 
-    final respuesta = await http.get(url).timeout(
+    final respuesta = await http.get(url).timeout( // Realiza la solicitud HTTP a la API y espera una respuesta, con un tiempo de espera de 15 segundos
       const Duration(seconds: 15),
     );
 
@@ -32,6 +32,6 @@ class ApiService {
       };
     }
 
-    throw Exception('No se pudieron obtener los personajes');
+    throw Exception('No se pudieron obtener los personajes'); // Lanza una excepción si la respuesta no es exitosa y no es un error 404
   }
 }

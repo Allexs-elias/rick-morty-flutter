@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PortalRoute extends PageRouteBuilder<void> {
+class PortalRoute extends PageRouteBuilder<void> { // Pagina de transición personalizada para la animación de portal
   PortalRoute({required Widget pantalla})
       : super(
           transitionDuration: const Duration(milliseconds: 1000),
@@ -27,7 +27,7 @@ class PortalRoute extends PageRouteBuilder<void> {
               ),
             );
 
-            return Stack(
+            return Stack( // Stack para superponer la animación de portal y la pantalla de destino
               fit: StackFit.expand,
               children: [
                 IgnorePointer(
@@ -74,11 +74,11 @@ class PortalRoute extends PageRouteBuilder<void> {
         );
 }
 
-class PortalPainter extends CustomPainter {
+class PortalPainter extends CustomPainter { // Pintor personalizado para dibujar la animación de portal
   const PortalPainter();
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size size) { // Dibuja el portal en el canvas, con un gradiente radial y líneas concéntricas
     final centro = Offset(size.width / 2, size.height / 2);
     final radio = size.shortestSide / 2;
 

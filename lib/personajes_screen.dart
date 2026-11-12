@@ -4,14 +4,14 @@ import 'detalle_personaje.dart';
 import 'portal_transition.dart';
 import 'tarjeta_personaje.dart';
 
-class PersonajesScreen extends StatefulWidget {
+class PersonajesScreen extends StatefulWidget { // Pantalla principal de la aplicación, que muestra la lista de personajes y permite buscar y filtrar
   const PersonajesScreen({super.key});
 
   @override
   State<PersonajesScreen> createState() => _PersonajesScreenState();
 }
 
-class _PersonajesScreenState extends State<PersonajesScreen> {
+class _PersonajesScreenState extends State<PersonajesScreen> { // Estado de la pantalla de personajes, incluyendo la lista de personajes, el estado de carga, los filtros y la paginación
   final buscador = TextEditingController();
 
   List<dynamic> personajes = [];
@@ -22,7 +22,7 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
   int pagina = 1;
   int totalPaginas = 1;
 
-  @override
+  @override // Inicializa el estado de la pantalla de personajes, cargando los personajes desde la API
   void initState() {
     super.initState();
     cargarPersonajes();
@@ -59,7 +59,7 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
     }
   }
 
-  void buscar() {
+  void buscar() { // Función para buscar personajes por nombre, actualizando la página y cargando los personajes desde la API
     if (cargando) return;
     busqueda = buscador.text.trim();
     pagina = 1;
@@ -67,12 +67,12 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
     cargarPersonajes();
   }
 
-  void cambiarPagina(int cambio) {
+  void cambiarPagina(int cambio) { // Función para cambiar la página de resultados, actualizando la página y cargando los personajes desde la API
     pagina += cambio;
     cargarPersonajes();
   }
 
-  void abrirPersonaje(Map<String, dynamic> personaje) {
+  void abrirPersonaje(Map<String, dynamic> personaje) { // Función para abrir la pantalla de detalle del personaje, utilizando una transición de portal y pasando los datos del personaje seleccionado
     FocusScope.of(context).unfocus();
 
     Navigator.of(context).push(
@@ -83,13 +83,13 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
   }
 
   @override
-  void dispose() {
+  void dispose() { // Libera los recursos del controlador de búsqueda cuando la pantalla de personajes se destruye
     buscador.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // Crea la estructura principal de la pantalla de personajes, incluyendo el campo de búsqueda, filtros, contenido y paginación
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -140,7 +140,7 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
     );
   }
 
-  Widget campoBusqueda() {
+  Widget campoBusqueda() { // Campo de búsqueda para filtrar personajes por nombre
     return TextField(
       controller: buscador,
       textInputAction: TextInputAction.search,
@@ -204,9 +204,9 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
     );
   }
 
-  Widget contenido() {
+  Widget contenido() { // Crea el contenido principal de la pantalla de personajes, mostrando un indicador de carga, un mensaje de error, un mensaje de no resultados o la lista de personajes en una cuadrícula
     if (cargando) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator()); // Muestra un indicador de carga mientras se obtienen los personajes
     }
 
     if (error != null) {
@@ -233,7 +233,7 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
       );
     }
 
-    if (personajes.isEmpty) {
+    if (personajes.isEmpty) { // Muestra un mensaje si no se encontraron personajes con los filtros aplicados
       return const Center(
         child: Text(
           'No encontramos personajes con esos filtros.',
@@ -274,7 +274,7 @@ class _PersonajesScreenState extends State<PersonajesScreen> {
     );
   }
 
-  Widget paginacion() {
+  Widget paginacion() { // Crea los controles de paginación para navegar entre las páginas de resultados, mostrando botones para ir a la página anterior y siguiente, y deshabilitándolos según corresponda
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

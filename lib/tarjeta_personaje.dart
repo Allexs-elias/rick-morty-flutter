@@ -4,17 +4,17 @@ class TarjetaPersonaje extends StatelessWidget {
   final Map<String, dynamic> personaje;
   final VoidCallback onTap;
 
-  const TarjetaPersonaje({
+  const TarjetaPersonaje({ // Const constructor for the TarjetaPersonaje widget
     super.key,
     required this.personaje,
     required this.onTap,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // Build method to create the widget tree for the TarjetaPersonaje widget
     final estado = personaje['status'];
 
-    final color = estado == 'Alive'
+    final color = estado == 'Alive' // Si esta vivo, el color es verde, si esta muerto es rojo, si es desconocido es gris
         ? const Color(0xFFB5ED63)
         : estado == 'Dead'
             ? const Color(0xFFFF7979)
@@ -26,7 +26,7 @@ class TarjetaPersonaje extends StatelessWidget {
             ? 'Muerto'
             : 'Desconocido';
 
-    return MouseRegion(
+    return MouseRegion( // Para cambiar el cursor al pasar sobre la tarjeta
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: onTap,
